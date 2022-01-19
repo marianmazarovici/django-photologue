@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
-from django.utils.translation import ungettext
+from django.utils.translation import ngettext
 
 from .forms import UploadZipForm
 from .models import Gallery, Photo, PhotoEffect, PhotoSize, Watermark
@@ -56,7 +56,7 @@ class GalleryAdmin(admin.ModelAdmin):
         super().save_related(request, form, *args, **kwargs)
         orphaned_photos = form.instance.orphaned_photos()
         if orphaned_photos:
-            msg = ungettext(
+            msg = ngettext(
                 'The following photo does not belong to the same site(s)'
                 ' as the gallery, so will never be displayed: %(photo_list)s.',
                 'The following photos do not belong to the same site(s)'
